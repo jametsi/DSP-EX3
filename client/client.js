@@ -1,17 +1,17 @@
 'use strict';
 
 var client = {
-    history: [],
     serverUrl: 'http://localhost:8080/calculate',
     resultsElement: $('.results'),
     init: function() {
+        cache.init();
         this.printHistory();
     },
     // clear results element and then populate it with the history items
     printHistory: function() {
         var self = this;
         this.resultsElement.html('');
-        this.history.forEach(function(line) {
+        cache.history.forEach(function(line) {
             $('<li/>')
                 .addClass('history_line')
                 .text(line)
@@ -20,7 +20,7 @@ var client = {
     },
     // clear history
     clear: function() {
-        this.history = [];
+        cache.clear();
         this.resultsElement.html('');
     },
     // submit form data and add solution to the head of history on success
@@ -38,7 +38,7 @@ var client = {
                 op: op
             }
         }).done(function(data) {
-            self.history.unshift(data);
+            cache.add(data);
             self.printHistory();
         });
     }
