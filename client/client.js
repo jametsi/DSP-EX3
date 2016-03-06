@@ -1,16 +1,16 @@
-"use strict";
+'use strict';
 
 var client = {
     history: [],
-    serverUrl: "http://localhost:8080/calculate",
-    resultsElement: $(".results"),
+    serverUrl: 'http://localhost:8080/calculate',
+    resultsElement: $('.results'),
     init: function() {
         this.printHistory();
     },
-    // clear results element and then populate it with the history items in reverse order
+    // clear results element and then populate it with the history items
     printHistory: function() {
         var self = this;
-        this.resultsElement.html("");
+        this.resultsElement.html('');
         this.history.forEach(function(line) {
             $('<li/>')
                 .addClass('history_line')
@@ -18,10 +18,12 @@ var client = {
                 .appendTo(self.resultsElement);
         });
     },
+    // clear history
     clear: function() {
         this.history = [];
-        this.resultsElement.html("");
+        this.resultsElement.html('');
     },
+    // submit form data and add solution to the head of history on success
     submit: function() {
         var self = this;
         var arg1 = $('.arg1').val();
