@@ -13,7 +13,7 @@ var client = {
         this.resultsElement.html('');
         cache.history.forEach(function(line) {
             $('<li/>')
-                .addClass('history_line')
+                .addClass('history-line')
                 .text(line)
                 .appendTo(self.resultsElement);
         });
@@ -23,7 +23,7 @@ var client = {
         cache.clear();
         this.resultsElement.html('');
     },
-    // submit form data and add solution to the head of history on success
+    // submit form data and add solution to cache on success
     submit: function() {
         var self = this;
         var arg1 = $('.arg1').val();
