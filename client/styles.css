@@ -2,3 +2,7 @@
     float: left;
     width: 50%;
 }
+.panel-half {
+    width: 25%;
+    float: left;
+}

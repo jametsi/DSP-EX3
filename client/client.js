@@ -1,8 +1,12 @@
 'use strict';
 
 var client = {
-    serverUrl: 'http://localhost:8080/calculate',
+    serverUrl: 'http://localhost:8080',
+    calculatorInput: $('.calculator-input'),
+    sineInput: $('.sine-input'),
     resultsElement: $('.results'),
+    finalResultElement: $('.final-result'),
+    sinePlotContainer: $('.sine-plot'),
     init: function() {
         cache.init();
         this.printHistory();
@@ -28,7 +32,7 @@ var client = {
         var self = this;
         $.ajax({
             async: false,
-            url: this.serverUrl,
+            url: this.serverUrl + '/calculate',
             data: {
                 arg1: arg1,
                 op: op,
@@ -40,22 +44,37 @@ var client = {
         });
     },
     submit: function() {
-        var operation = $('.operation').val().split(' ');
-        if (operation.length < 3) {
-            alert('Invalid operation length. Separate the elements of the operation with space.')
-        }
-        var arg1 = operation[0];
-        var op = operation[1];
-        var arg2 = operation[2];
+        var operationString = this.calculatorInput.val();
+        var operation = operationString.split(' ');
 
         while (operation.length > 1) {
+            if (operation.length < 3) {
+                alert('Invalid operation length. Separate the elements of the operation with space.')
+            }
+            var arg1 = operation[0];
+            var op = operation[1];
+            var arg2 = operation[2];
             this.submitOperation(arg1, op, arg2);
             operation = operation.slice(3);
             operation.unshift(cache.history[0].split(' ')[4]);
-            arg1 = operation[0];
-            op = operation[1];
-            arg2 = operation[2];
         }
-
+        this.finalResultElement.text(operationString + ' = ' + operation[0]);
+    },
+    plotSine: function() {
+        var self = this;
+        $.ajax({
+            url: this.serverUrl + '/plot_sine',
+            data: {
+                sineFunction: self.sineInput.val()
+            }
+        }).done(function(data) {
+            self.showGraph(data);
+        });
+    },
+    showGraph: function(url) {
+        this.sinePlotContainer.html("");
+        $('<img/>')
+            .attr('src', url)
+            .appendTo(this.sinePlotContainer);
     }
 };

@@ -8,17 +8,26 @@
 </head>
 
 <body onload="client.init()">
-    <div class="panel">
+
+    <div class="panel-half">
         <h3>Calculator</h3>
         <form>
-            <input class="operation" type="text">
+            <input class="calculator-input" type="text">
             <input type="button" value="Submit" onclick="client.submit()">
         </form>
-    </div>
-
-    <div class="panel">
+        <p class="final-result"></p>
         <h3>History <input type="button" value="Clear" onclick="client.clear()"></h3>
         <ol class="results"></ol>
+    </div>
+
+    <div class="panel-half">
+        <h3>Sine Plot</h3>
+        <form>
+            <input class="sine-input" type="text" value="sin(x)" disabled="true">
+            <input type="button" value="Submit" onclick="client.plotSine()">
+        </form>
+
+        <div class="sine-plot"></div>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>

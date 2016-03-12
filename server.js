@@ -1,11 +1,14 @@
 var express = require("express");
 var app = express();
 var calculator = require("./calculator.js");
-
+var plot = require('plotter').plot;
+var uuid = require('node-uuid');
+var crypto = require('crypto');
 var port = 8080;
 
 // Serve static files from client directory
 app.use(express.static("client"));
+app.use(express.static("output"));
 
 app.get("/calculate", function(req, res) {
     console.log(req.query);
@@ -20,6 +23,23 @@ app.get("/calculate", function(req, res) {
     var answer = String(calculator.calculate(arg1, arg2, op));
 
     res.send(arg1 + " " + op + " " + arg2 + " = " + answer);
+});
+
+app.get("/plot_sine", function(req, res) {
+    var filename = crypto.createHash('md5').update(req.query.sineFunction).digest('hex');
+    var data = {};
+    for (var i = -Math.PI; i < Math.PI; i += .1) {
+        data[i] = Math.sin(i);
+    }
+
+    plot({
+        title: 'sin(x), -π < x < π',
+        data:       { 'sin(x)': data },
+        filename:   'output/' + filename + '.png',
+        finish: function() {
+            res.send('/' + filename + '.png');
+        }
+    });
 });
 
 app.listen(port, function () {
