@@ -2,7 +2,6 @@ var express = require("express");
 var app = express();
 var calculator = require("./calculator.js");
 var plot = require('plotter').plot;
-var uuid = require('node-uuid');
 var crypto = require('crypto');
 var port = 8080;
 
@@ -11,7 +10,6 @@ app.use(express.static("client"));
 app.use(express.static("output"));
 
 app.get("/calculate", function(req, res) {
-    console.log(req.query);
     if (!req.query.arg1 || !req.query.arg2 || !req.query.op) {
         res.send("Invalid request parameters. Expecting arg1, arg2 & op to be defined");
         return;
@@ -26,7 +24,9 @@ app.get("/calculate", function(req, res) {
 });
 
 app.get("/plot_sine", function(req, res) {
+    // create hash from the plot function and use it as a filename
     var filename = crypto.createHash('md5').update(req.query.sineFunction).digest('hex');
+
     var data = {};
     for (var i = -Math.PI; i < Math.PI; i += .1) {
         data[i] = Math.sin(i);
