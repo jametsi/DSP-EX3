@@ -4,32 +4,14 @@ var client = {
     serverUrl: 'http://localhost:8080',
     calculatorInput: $('.calculator-input'),
     sineInput: $('.sine-input'),
-    resultsElement: $('.results'),
     finalResultElement: $('.final-result'),
     sinePlotContainer: $('.sine-plot'),
     init: function () {
-        cache.init();
-        this.printHistory();
+        cal_history.init($('.history'));
     },
-    // clear results element and then populate it with the history items
-    printHistory: function () {
-        var self = this;
-        this.resultsElement.html('');
-        cache.history.forEach(function (line) {
-            $('<li/>')
-                .addClass('history-line')
-                .text(line)
-                .appendTo(self.resultsElement);
-        });
-    },
-    // clear history
-    clear: function () {
-        cache.clear();
-        this.resultsElement.html('');
-    },
-    // submit form data and add solution to cache on success
+    // submit form data and add solution to history on success
     submitOperation: function (arg1, op, arg2) {
-        var self = this;
+        var returnValue = null;
         $.ajax({
             async: false,
             url: this.serverUrl + '/calculate',
@@ -39,11 +21,11 @@ var client = {
                 arg2: arg2
             }
         }).done(function (data) {
-            cache.add(data);
-            self.printHistory();
+            returnValue = data;
         });
+        return returnValue;
     },
-    processCalculation: function (operationString) {
+    processCalculation: function (operationString, addToHistory) {
         var operation = operationString.split(' ');
         while (operation.length > 1) {
             if (operation.length < 3) {
@@ -52,9 +34,14 @@ var client = {
             var arg1 = operation[0];
             var op = operation[1];
             var arg2 = operation[2];
-            this.submitOperation(arg1, op, arg2);
+            var solution = this.submitOperation(arg1, op, arg2);
+            var result = solution.split(' ')[4];
+            if (addToHistory) {
+                console.log('adding to history!');
+                cal_history.add(solution);
+            }
             operation = operation.slice(3);
-            operation.unshift(cache.history[0].split(' ')[4]);
+            operation.unshift(result);
         }
         return operation[0];
     },

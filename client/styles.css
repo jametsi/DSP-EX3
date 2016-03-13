@@ -1,8 +1,12 @@
-.panel {
-    float: left;
-    width: 50%;
-}
-.panel-half {
+.thin-panel {
     width: 25%;
     float: left;
+}
+.wide-panel {
+    width: 70%;
+    float: left;
+    margin-left: 10px;
+}
+.sine-input {
+    margin-bottom: 5px;
 }
