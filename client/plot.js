@@ -1,3 +1,6 @@
+// Jami Karvanen - 014023196
+'use strict';
+
 var plot = {
     canvas: null,
     width: 640,

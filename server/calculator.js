@@ -1,4 +1,5 @@
 "use strict";
+// Jami Karvanen - 014023196
 
 exports.calculate = function (num1, num2, op) {
     switch (op) {

@@ -10,7 +10,7 @@
     "type": "git",
     "url": "https://github.com/jametsi/DSP-EX3.git"
   },
-  "author": "Jami Karvanen",
+  "author": "Jami Karvanen - 014023196",
   "license": "ISC",
   "dependencies": {
     "express": "^4.13.4",

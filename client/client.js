@@ -1,4 +1,5 @@
 'use strict';
+// Jami Karvanen - 014023196
 
 var client = {
     calculatorInput: $('.calculator-input'),
