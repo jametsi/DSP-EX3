@@ -60,7 +60,7 @@ var client = {
         }
         this.finalResultElement.text(operationString + ' = ' + operation[0]);
     },
-    plotSine: function() {
+    plotSineOnServer: function() {
         var self = this;
         $.ajax({
             url: this.serverUrl + '/plot_sine',
@@ -68,13 +68,17 @@ var client = {
                 sineFunction: self.sineInput.val()
             }
         }).done(function(data) {
-            self.showGraph(data);
+            self.showServerPlot(data);
         });
     },
-    showGraph: function(url) {
+    showServerPlot: function(url) {
         this.sinePlotContainer.html("");
         $('<img/>')
             .attr('src', url)
             .appendTo(this.sinePlotContainer);
+    },
+    plotSineOnClient: function () {
+        plot.init(this.sinePlotContainer);
+        plot.generateData();
     }
 };
