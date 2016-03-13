@@ -8,5 +8,12 @@
     margin-left: 10px;
 }
 .sine-input {
+    width: 100px;
     margin-bottom: 5px;
+}
+.cache-size {
+    width: 35px;
+}
+label > input {
+    margin-left: 5px;
 }

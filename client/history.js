@@ -8,7 +8,6 @@ var cal_history = {
     },
     add: function (calculation) {
         this.history.unshift(calculation);
-        console.log(this.history);
         this.print();
     },
     // clear results element and then populate it with the history items

@@ -7,8 +7,8 @@ var plot = {
         right: 70,
         top: 58,
         bottom: 38
-    }
-    ,
+    },
+    counter: 0,
     init: function (plotContainer) {
         var self = this;
         this.canvas = $('<canvas>')

@@ -13,17 +13,21 @@
         <h3>Calculator</h3>
         <form>
             <input class="calculator-input" type="text">
+            <input type="button" value="Simplify" onclick="client.simplifyCalcInput()">
             <input type="button" value="Submit" onclick="client.submit()">
         </form>
         <p class="final-result"></p>
-        <h3>History <input type="button" value="Clear" onclick="client.clear()"></h3>
+        <h3>History <input type="button" value="Clear" onclick="cal_history.clear()"></h3>
         <ol class="history"></ol>
     </div>
 
     <div class="wide-panel">
         <h3>Sine Plot</h3>
         <form>
-            <input class="sine-input" type="text" value="sin(x)" disabled="true"></br>
+            <label>Function<input class="sine-input" type="text" value="sin(x)" disabled="true"></label>
+            <label>Cache size<input class="cache-size" type="text" value="10"></label>
+            <input type="button" value="Set" onclick="cache.setSize()">
+            <input type="button" value="Clear cache" onclick="cache.clear()"></br>
             <input type="button" value="Plot on server" onclick="client.plotSineOnServer()">
             <input type="button" value="Plot on client" onclick="client.plotSineOnClient()">
             <input type="button" value="Calculate on server, plot on client" onclick="client.plotSineOnClientAndServer()">
