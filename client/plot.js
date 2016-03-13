@@ -9,7 +9,7 @@ var plot = {
         bottom: 38
     }
     ,
-    init: function(plotContainer) {
+    init: function (plotContainer) {
         var self = this;
         this.canvas = $('<canvas>')
             .attr({
@@ -20,12 +20,12 @@ var plot = {
         plotContainer.html(this.canvas);
         this.plotSine(this.generateData());
     },
-    plotSine: function(data) {
+    plotSine: function (data) {
         var ctx = this.canvas[0].getContext("2d");
         this.drawAxes(ctx);
         this.drawCurve(ctx, data);
     },
-    drawAxes: function(ctx) {
+    drawAxes: function (ctx) {
         ctx.font = "16px Arial";
 
         // Y
@@ -44,7 +44,7 @@ var plot = {
         ctx.fillText("1", this.margin.left - 15, this.margin.top + 5);
         ctx.fillText("-1", this.margin.left - 20, this.height - this.margin.bottom );
     },
-    drawCurve: function(ctx, data) {
+    drawCurve: function (ctx, data) {
         var self = this;
         var stepWidth = (this.width - this.margin.left - this.margin.right) / data.length;
 
@@ -55,7 +55,7 @@ var plot = {
         }
 
         ctx.beginPath();
-        data.forEach(function(value, i) {
+        data.forEach(function (value, i) {
             if (i == 0) {
                 ctx.moveTo(self.margin.left, calculateY(value));
             }
@@ -65,7 +65,7 @@ var plot = {
         });
         ctx.stroke();
     },
-    generateData: function() {
+    generateData: function () {
         var data = [];
         for (var i = -Math.PI; i < Math.PI; i += .1) {
             data.push(Math.sin(i));

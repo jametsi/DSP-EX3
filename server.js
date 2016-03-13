@@ -1,17 +1,19 @@
-var express = require("express");
+'use strict';
+
+var express = require('express');
 var app = express();
-var calculator = require("./calculator.js");
+var calculator = require('./calculator.js');
 var plot = require('plotter').plot;
 var crypto = require('crypto');
 var port = 8080;
 
-// Serve static files from client directory
-app.use(express.static("client"));
-app.use(express.static("output"));
+// Serve static files from client & output directories
+app.use(express.static('client'));
+app.use(express.static('output'));
 
-app.get("/calculate", function(req, res) {
+app.get('/calculate', function (req, res) {
     if (!req.query.arg1 || !req.query.arg2 || !req.query.op) {
-        res.send("Invalid request parameters. Expecting arg1, arg2 & op to be defined");
+        res.send('Invalid request parameters. Expecting arg1, arg2 & op to be defined');
         return;
     }
 
@@ -20,11 +22,11 @@ app.get("/calculate", function(req, res) {
     var op = req.query.op;
     var answer = String(calculator.calculate(arg1, arg2, op));
 
-    res.send(arg1 + " " + op + " " + arg2 + " = " + answer);
+    res.send(arg1 + ' ' + op + ' ' + arg2 + ' = ' + answer);
 });
 
-app.get("/plot_sine", function(req, res) {
-    // create hash from the plot function and use it as a filename
+app.get('/plot_sine', function (req, res) {
+    // create hash from the plot function (provided by the request) and use it as a filename
     var filename = crypto.createHash('md5').update(req.query.sineFunction).digest('hex');
 
     var data = {};
@@ -36,12 +38,12 @@ app.get("/plot_sine", function(req, res) {
         title: 'sin(x), -π < x < π',
         data:       { 'sin(x)': data },
         filename:   'output/' + filename + '.png',
-        finish: function() {
+        finish: function () {
             res.send('/' + filename + '.png');
         }
     });
 });
 
 app.listen(port, function () {
-    console.log("App listening on port", port + "!");
+    console.log('App listening on port', port + '!');
 });

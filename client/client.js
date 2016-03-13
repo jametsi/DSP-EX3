@@ -7,15 +7,15 @@ var client = {
     resultsElement: $('.results'),
     finalResultElement: $('.final-result'),
     sinePlotContainer: $('.sine-plot'),
-    init: function() {
+    init: function () {
         cache.init();
         this.printHistory();
     },
     // clear results element and then populate it with the history items
-    printHistory: function() {
+    printHistory: function () {
         var self = this;
         this.resultsElement.html('');
-        cache.history.forEach(function(line) {
+        cache.history.forEach(function (line) {
             $('<li/>')
                 .addClass('history-line')
                 .text(line)
@@ -23,12 +23,12 @@ var client = {
         });
     },
     // clear history
-    clear: function() {
+    clear: function () {
         cache.clear();
         this.resultsElement.html('');
     },
     // submit form data and add solution to cache on success
-    submitOperation: function(arg1, op, arg2) {
+    submitOperation: function (arg1, op, arg2) {
         var self = this;
         $.ajax({
             async: false,
@@ -38,12 +38,12 @@ var client = {
                 op: op,
                 arg2: arg2
             }
-        }).done(function(data) {
+        }).done(function (data) {
             cache.add(data);
             self.printHistory();
         });
     },
-    submit: function() {
+    submit: function () {
         var operationString = this.calculatorInput.val();
         var operation = operationString.split(' ');
 
@@ -60,18 +60,18 @@ var client = {
         }
         this.finalResultElement.text(operationString + ' = ' + operation[0]);
     },
-    plotSineOnServer: function() {
+    plotSineOnServer: function () {
         var self = this;
         $.ajax({
             url: this.serverUrl + '/plot_sine',
             data: {
                 sineFunction: self.sineInput.val()
             }
-        }).done(function(data) {
+        }).done(function (data) {
             self.showServerPlot(data);
         });
     },
-    showServerPlot: function(url) {
+    showServerPlot: function (url) {
         this.sinePlotContainer.html("");
         $('<img/>')
             .attr('src', url)

@@ -1,6 +1,6 @@
 "use strict";
 
-exports.calculate = function(num1, num2, op) {
+exports.calculate = function (num1, num2, op) {
     switch (op) {
         case "+":
             return num1 + num2;
