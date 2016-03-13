@@ -1,7 +1,6 @@
 'use strict';
 
 var client = {
-    serverUrl: 'http://localhost:8080',
     calculatorInput: $('.calculator-input'),
     sineInput: $('.sine-input'),
     finalResultElement: $('.final-result'),
@@ -17,7 +16,7 @@ var client = {
         var returnValue = null;
         $.ajax({
             async: false,
-            url: this.serverUrl + '/calculate',
+            url: '/calculate',
             data: {
                 arg1: arg1,
                 op: op,
@@ -97,7 +96,7 @@ var client = {
         this.sinePlotContainer.html('');
         var self = this;
         $.ajax({
-            url: this.serverUrl + '/plot_sine',
+            url: '/plot_sine',
             data: {
                 sineFunction: self.sineInput.val()
             }
