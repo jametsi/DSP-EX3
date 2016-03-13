@@ -43,13 +43,11 @@ var client = {
             self.printHistory();
         });
     },
-    submit: function () {
-        var operationString = this.calculatorInput.val();
+    processCalculation: function (operationString) {
         var operation = operationString.split(' ');
-
         while (operation.length > 1) {
             if (operation.length < 3) {
-                alert('Invalid operation length. Separate the elements of the operation with space.')
+                alert('Invalid operation length. Remember to separate elements of the operation with space.')
             }
             var arg1 = operation[0];
             var op = operation[1];
@@ -58,7 +56,12 @@ var client = {
             operation = operation.slice(3);
             operation.unshift(cache.history[0].split(' ')[4]);
         }
-        this.finalResultElement.text(operationString + ' = ' + operation[0]);
+        return operation[0];
+    },
+    submit: function () {
+        var operationString = this.calculatorInput.val();
+        var value = this.processCalculation(operationString, true);
+        this.finalResultElement.text(operationString + ' = ' + value);
     },
     plotSineOnServer: function () {
         var self = this;
@@ -79,6 +82,10 @@ var client = {
     },
     plotSineOnClient: function () {
         plot.init(this.sinePlotContainer);
-        plot.generateData();
+        plot.plotSine(plot.generateData());
+    },
+    plotSineOnClientAndServer: function () {
+        plot.init(this.sinePlotContainer);
+        plot.plotSine(plot.getDataFromServer());
     }
 };

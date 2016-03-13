@@ -18,7 +18,6 @@ var plot = {
                 'class': 'plot-canvas'
             });
         plotContainer.html(this.canvas);
-        this.plotSine(this.generateData());
     },
     plotSine: function (data) {
         var ctx = this.canvas[0].getContext("2d");
@@ -67,8 +66,27 @@ var plot = {
     },
     generateData: function () {
         var data = [];
-        for (var i = -Math.PI; i < Math.PI; i += .1) {
-            data.push(Math.sin(i));
+        for (var x = -Math.PI; x < Math.PI; x += .1) {
+            data.push(Math.sin(x));
+        }
+        return data;
+    },
+    // Bhaskara I's sine approximation formula from: https://en.wikipedia.org/wiki/Bhaskara_I%27s_sine_approximation_formula
+    // Absolute value of x is used for calculations and the negative sign is added to the return value if the original x was negative
+    approximateDatapoint: function (original_x) {
+        var x = Math.abs(original_x);
+        var calc_1 = client.processCalculation(Math.PI + ' - ' + x + ' * ' + x);
+        var calc_2 = client.processCalculation('4 * ' + calc_1);
+        var calc_3 = client.processCalculation(Math.PI + ' ** 2 * 5');
+        var denominator = client.processCalculation(calc_3 + ' - ' + calc_2);
+        var final_value = parseFloat(client.processCalculation('16 * ' + calc_1 + ' / ' + denominator));
+        return original_x >= 0 ? final_value : -final_value;
+    },
+    getDataFromServer: function () {
+        var data = [];
+        for (var x = -Math.PI; x < Math.PI; x += .1) {
+            var datapoint = this.approximateDatapoint(x);
+            data.push(datapoint);
         }
         return data;
     }
