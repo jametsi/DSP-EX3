@@ -11,6 +11,7 @@ var port = 8080;
 app.use(express.static('client'));
 app.use(express.static('output'));
 
+// This endpoint is for the simple calculation requests
 app.get('/calculate', function (req, res) {
     if (!req.query.arg1 || !req.query.arg2 || !req.query.op) {
         res.send('Invalid request parameters. Expecting arg1, arg2 & op to be defined');
@@ -25,6 +26,7 @@ app.get('/calculate', function (req, res) {
     res.send(arg1 + ' ' + op + ' ' + arg2 + ' = ' + answer);
 });
 
+// This endpoint is used when generating the serverside plot of sin(x)
 app.get('/plot_sine', function (req, res) {
     // create hash from the plot function (provided by the request) and use it as a filename
     var filename = crypto.createHash('md5').update(req.query.sineFunction).digest('hex');

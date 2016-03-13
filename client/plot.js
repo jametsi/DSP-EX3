@@ -10,6 +10,7 @@ var plot = {
     },
     counter: 0,
     init: function (plotContainer) {
+        plotContainer.html('');
         var self = this;
         this.canvas = $('<canvas>')
             .attr({
@@ -20,28 +21,28 @@ var plot = {
         plotContainer.html(this.canvas);
     },
     plotSine: function (data) {
-        var ctx = this.canvas[0].getContext("2d");
+        var ctx = this.canvas[0].getContext('2d');
         this.drawAxes(ctx);
         this.drawCurve(ctx, data);
     },
     drawAxes: function (ctx) {
-        ctx.font = "16px Arial";
+        ctx.font = '16px Arial';
 
         // Y
         ctx.beginPath();
         ctx.moveTo(this.margin.left, this.margin.top);
         ctx.lineTo(this.margin.left, this.height - this.margin.bottom);
         ctx.stroke();
-        ctx.fillText("-π", this.margin.left - 5, this.height - this.margin.bottom + 15);
-        ctx.fillText("π", this.width - this.margin.right - 5, this.height - this.margin.bottom + 15);
+        ctx.fillText('-π', this.margin.left - 5, this.height - this.margin.bottom + 15);
+        ctx.fillText('π', this.width - this.margin.right - 5, this.height - this.margin.bottom + 15);
 
         // X
         ctx.beginPath();
         ctx.moveTo(this.margin.left, this.height - this.margin.bottom);
         ctx.lineTo(this.width - this.margin.right, this.height - this.margin.bottom);
         ctx.stroke();
-        ctx.fillText("1", this.margin.left - 15, this.margin.top + 5);
-        ctx.fillText("-1", this.margin.left - 20, this.height - this.margin.bottom );
+        ctx.fillText('1', this.margin.left - 15, this.margin.top + 5);
+        ctx.fillText('-1', this.margin.left - 20, this.height - this.margin.bottom );
     },
     drawCurve: function (ctx, data) {
         var self = this;

@@ -94,8 +94,7 @@ var client = {
         return operationString;
     },
     plotSineOnServer: function () {
-        var plotContainer = $('.sine-plot');
-        plotContainer.html("");
+        this.sinePlotContainer.html('');
         var self = this;
         $.ajax({
             url: this.serverUrl + '/plot_sine',
@@ -107,21 +106,18 @@ var client = {
         });
     },
     showServerPlot: function (url) {
+        this.sinePlotContainer.html('');
         $('<img/>')
             .attr('src', url)
             .appendTo(this.sinePlotContainer);
     },
     plotSineOnClient: function () {
-        var plotContainer = $('.sine-plot');
-        plotContainer.html("");
-        plot.init(plotContainer);
+        plot.init(this.sinePlotContainer);
         plot.plotSine(plot.generateData());
     },
     plotSineOnClientAndServer: function () {
         this.requestCounter = 0;
-        var plotContainer = $('.sine-plot');
-        plotContainer.html("");
-        plot.init(plotContainer);
+        plot.init(this.sinePlotContainer);
         plot.plotSine(plot.getDataFromServer());
         console.log('Requests made during plotting: ' + this.requestCounter);
     }
