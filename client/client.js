@@ -123,7 +123,11 @@ var client = {
     plotSineOnClientAndServer: function () {
         this.requestCounter = 0;
         plot.init(this.sinePlotContainer);
+        var startTime = new Date().getTime();
         plot.plotSine(plot.getDataFromServer());
+        var endTime = new Date().getTime();
+        var time = endTime - startTime;
+        alert('Plotting took ' + time + 'ms. Request count: ' + this.requestCounter);
         console.log('Requests made during plotting: ' + this.requestCounter);
     }
 };
