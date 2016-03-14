@@ -60,7 +60,12 @@ var client = {
         return operation[0];
     },
     submit: function () {
-        var operationString = this.calculatorInput.val();
+        var operationString = this.calculatorInput.val().trim();
+        var splitted = operationString.split(' ');
+        if (splitted.length < 3 || splitted.length % 2 == 0) {
+            alert("Invalid calculation syntax. Remember to use spaces between numbers and operators.");
+            return;
+        }
         var value = this.processCalculation(operationString, true);
         this.finalResultElement.text(operationString + ' = ' + value);
     },

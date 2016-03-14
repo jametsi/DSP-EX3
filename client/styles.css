@@ -1,5 +1,12 @@
 /* Jami Karvanen - 014023196 */
 
+.body {
+    margin-left: 25px;
+}
+h4, h5 {
+    margin-bottom: 3px;
+    margin-top: 20px;
+}
 .thin-panel {
     width: 25%;
     float: left;
@@ -9,12 +16,22 @@
     float: left;
     margin-left: 10px;
 }
+.calculator-input {
+    width: 200px;
+    display: inline-block;
+}
 .sine-input {
-    width: 100px;
+    width: 96px;
     margin-bottom: 5px;
 }
 .cache-size {
-    width: 35px;
+    width: 50px;
+}
+.sine-input {
+    width: 353px;
+}
+.well {
+    max-width: 353px;
 }
 label > input {
     margin-left: 5px;
