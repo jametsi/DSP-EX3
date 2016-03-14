@@ -8,8 +8,15 @@ var client = {
     sinePlotContainer: $('.sine-plot'),
     requestCounter: 0,
     init: function () {
+        var self = this;
         cal_history.init($('.history'));
         cache.init(parseInt($('.cache-size').val()));
+        this.calculatorInput.keypress(function(event) {
+            if (event.which == 13) {
+                event.preventDefault();
+                self.submit();
+            }
+        });
     },
     // submit form data and add solution to history on success
     submitOperation: function (arg1, op, arg2) {
@@ -66,6 +73,7 @@ var client = {
             alert("Invalid calculation syntax. Remember to use spaces between numbers and operators.");
             return;
         }
+        this.calculatorInput.val('');
         var value = this.processCalculation(operationString, true);
         this.finalResultElement.text(operationString + ' = ' + value);
     },

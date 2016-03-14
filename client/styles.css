@@ -14,11 +14,10 @@ h4, h5 {
 .wide-panel {
     width: 70%;
     float: left;
-    margin-left: 10px;
+    margin-left: 50px;
 }
-.calculator-input {
-    width: 200px;
-    display: inline-block;
+.calculator {
+    margin-bottom: 20px;
 }
 .sine-input {
     width: 96px;
@@ -28,10 +27,10 @@ h4, h5 {
     width: 50px;
 }
 .sine-input {
-    width: 353px;
+    width: 466px;
 }
 .well {
-    max-width: 353px;
+    max-width: 466px;
 }
 label > input {
     margin-left: 5px;

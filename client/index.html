@@ -13,18 +13,26 @@
 
     <div class="thin-panel">
         <h3>Calculator</h3>
-        <form>
-            <input class="form-control calculator-input" type="text" placeholder="2 + 1 + 3">
-            <input class="btn btn-default" type="button" value="Simplify" onclick="client.simplifyCalcInput()">
-            <input class="btn btn-default" type="button" value="Submit" onclick="client.submit()">
+        <form class="calculator">
+            <div class="input-group">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" onclick="client.simplifyCalcInput()">Simplify</button>
+                </span>
+                <input class="form-control calculator-input" type="text" placeholder="2 + 1 + 3">
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" type="button" onclick="client.submit()">Submit</button>
+                </span>
+            </div>
+<!--            <input class="btn btn-default" type="button" value="Simplify" onclick="client.simplifyCalcInput()">
+            <input class="btn btn-default" type="button" value="Submit" onclick="client.submit()">-->
         </form>
 
-        <h4>Result</h4>
+        <label>Result</label>
         <div class="well">
             <p class="final-result"></p>
         </div>
 
-        <h4>History <input class="btn btn-xs btn-warning" type="button" value="Clear" onclick="cal_history.clear()"></h4>
+        <label>History <input class="btn btn-xs btn-warning" type="button" value="Clear" onclick="cal_history.clear()"></label>
         <div class="well">
             <ol class="history"></ol>
         </div>
@@ -33,14 +41,14 @@
     <div class="wide-panel">
         <h3>Sine Plot</h3>
         <form>
-            <h4>Function</h4>
-            <input class="form-control sine-input" type="text" value="sin(x)" disabled="true">
-
-            <h4>Cache <input class="btn btn-xs btn-warning" type="button" value="Clear" onclick="cache.clear()"></h4>
+            <label>Cache <input class="btn btn-xs btn-warning" type="button" value="Clear" onclick="cache.clear()"></label>
             <div class="well form-inline">
                 <label>Size<input class="form-control cache-size" type="text" value="10"></label>
                 <input class="btn btn-default" type="button" value="Set" onclick="cache.setSize()">
             </div>
+
+            <label>Function</label>
+            <input class="form-control sine-input" type="text" value="sin(x)" disabled="true">
 
             <input class="btn btn-default" type="button" value="Plot on server" onclick="client.plotSineOnServer()">
             <input class="btn btn-default" type="button" value="Plot on client" onclick="client.plotSineOnClient()">
